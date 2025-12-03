@@ -1,0 +1,77 @@
+-- 1
+SELECT * FROM Tracks;
+
+-- 2
+SELECT TrackId, Name FROM Tracks;
+
+-- 3
+SELECT FirstName, LastName FROM Customers ORDER BY LastName;
+
+-- 4
+SELECT COUNT(*) AS track_count FROM Tracks;
+
+-- 5
+SELECT TrackId, Name, Milliseconds FROM Tracks WHERE Milliseconds < 120000;
+
+-- 6
+SELECT t.Name AS track, g.Name AS genre
+FROM Tracks t
+JOIN Genres g ON g.GenreId = t.GenreId
+WHERE t.GenreId IS NOT NULL;
+
+-- 7
+SELECT CustomerId, Email FROM Customers;
+
+-- 8
+SELECT InvoiceId, InvoiceDate, Total
+FROM Invoices
+WHERE CustomerId = 5
+ORDER BY InvoiceDate;
+
+-- 9
+SELECT AVG(UnitPrice) AS avg_price FROM Tracks;
+
+-- 10
+SELECT t.TrackId, t.Name
+FROM Tracks t
+LEFT JOIN InvoiceLines il ON il.TrackId = t.TrackId
+WHERE il.InvoiceLineId IS NULL;
+
+-- 11
+SELECT i.CustomerId, ROUND(SUM(il.UnitPrice * il.Quantity), 2) AS revenue
+FROM Invoices i
+JOIN InvoiceLines il ON il.InvoiceId = i.InvoiceId
+GROUP BY i.CustomerId
+ORDER BY revenue DESC;
+
+-- 12
+SELECT TrackId, Name, UnitPrice
+FROM Tracks
+ORDER BY UnitPrice DESC
+LIMIT 5;
+
+-- 13
+SELECT STRFTIME('%Y', InvoiceDate) AS year, COUNT(*) AS invoices
+FROM Invoices
+GROUP BY year
+ORDER BY year;
+
+-- 14 (Differenz in Tagen zwischen erstem und letztem Kauf je Kunde)
+WITH c_dates AS (
+  SELECT CustomerId,
+         MIN(InvoiceDate) AS first_buy,
+         MAX(InvoiceDate) AS last_buy
+  FROM Invoices
+  GROUP BY CustomerId
+)
+SELECT CustomerId,
+       (JULIANDAY(last_buy) - JULIANDAY(first_buy)) AS days_between
+FROM c_dates;
+
+-- 15
+SELECT g.Name AS genre, ROUND(SUM(il.UnitPrice * il.Quantity), 2) AS revenue
+FROM InvoiceLines il
+JOIN Tracks t ON t.TrackId = il.TrackId
+JOIN Genres g ON g.GenreId = t.GenreId
+GROUP BY g.GenreId
+ORDER BY revenue DESC;
