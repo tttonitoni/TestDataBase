@@ -1,0 +1,15 @@
+Liste aller Tracks: Gib alle Zeilen aus Tracks aus.
+Tracknamen mit ID: Gib TrackId und Name aller Tracks aus.
+Kunden nach Nachname sortieren: Zeige FirstName, LastName aus Customers, sortiert nach LastName.
+Anzahl der Tracks: Zähle, wie viele Zeilen in Tracks existieren.
+Tracks mit kurzer Länge: Zeige alle Tracks mit Milliseconds < 120000.
+Tracks mit Genre: Gib Trackname, Genre-Name aus, aber nur wenn GenreId nicht NULL.
+Kunden mit E-Mail: Liste alle Kunden (CustomerId) und Email.
+Rechnungen eines bestimmten Kunden: Zeige alle InvoiceId aus Invoices für CustomerId = 5.
+Durchschnittspreis der Tracks: Berechne den Ø UnitPrice aller Tracks.
+Tracks, die nie verkauft wurden: Finde alle Tracks, die in InvoiceLines nicht vorkommen.
+Gesamtumsatz pro Kunde: Berechne SUM(UnitPrice*Quantity) pro CustomerId.
+Top‑5 teuerste Tracks: Gib 5 Tracks mit dem höchsten UnitPrice aus.
+Anzahl der Bestellungen pro Jahr: Zeige pro Jahr (InvoiceDate) die Anzahl der Rechnungen.
+Lieferzeiten-Analog: Berechne die durchschnittliche Länge (in Tagen) zwischen erstem und letztem Kauf pro Kunde.
+Umsatz pro Genre: Berechne den Gesamtumsatz pro Genre.
